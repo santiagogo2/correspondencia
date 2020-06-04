@@ -1,0 +1,32 @@
+<div class="bodyContainer container-fluid">
+	<div class="row justify-content-center align-items-center">
+		<div class="col col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div class="formContainer">
+				<div class="errorMessage mt-3 mb-3" *ngIf="status=='error' && errorMessage">
+					<span>{{ errorMessage }}</span>
+				</div>
+				<div class="preloaderContainer mt-5 mb-5" *ngIf="!dependence && !errorMessage">
+					<div id="preloaderDisco">
+					</div>
+				</div>
+				<div *ngIf="dependence">
+					<div class="titleStyles">
+						<span class="col col-sm-2 col-md-2 col-lg-1 col-xl-1"><a href="javascript:history.back()">Regresar</a></span>
+						<h3 class="col col-sm-10 col-md-10 col-lg-11 col-xl-11">{{ page_title }}</h3>
+					</div>
+					<div class="col col-sm-12">
+						<div class="mt-4 mb-3" style="margin: auto;" [ngClass]="{'successMessage':status=='success', 'errorMessage':status=='error'}" *ngIf="(status=='error' || status=='success') && responseMessage">
+							<span>{{ responseMessage }}</span><br/>
+							<span *ngIf="validationMessage">{{ validationMessage }}</span>
+						</div>
+					</div>
+					<app-dependence-model (sendFlagWithInfo)="onSubmit($event)"
+										  [dependence]="this.dependence"
+										  [buttonText]="this.buttonText"
+										  [preloaderStatus]="this.preloaderStatus"
+					></app-dependence-model>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

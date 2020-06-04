@@ -1,0 +1,8 @@
+.searchButton{
+	padding: .175rem .75rem;
+	font-size: 75%;
+	min-width: 30%;
+}
+.thead_styles tr th{
+	text-transform: uppercase;
+}

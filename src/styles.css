@@ -1,1 +1,599 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+body{
+	background-color: #F7F7F7; 
+}
+body::-webkit-scrollbar{
+	width: 8px;
+}
+
+body::-webkit-scrollbar-thumb{
+	background: linear-gradient(#E0E0E0, #039DE2);
+	border-radius: 3px;
+	/*background: #BD091F;*/
+}
+
+/*----------------------------------------
+Header Styles
+----------------------------------------*/
+.headerContainer{
+	width: 100%;
+	overflow: hidden;
+	background-color: #E2E2E2;
+}
+.wrapHeader{
+	width: 100%;
+	padding: 2rem 1rem;
+}
+.correspondenceContainer, .institutionalLogos{
+	display: inline-block;
+}
+.correspondenceContainer span{
+	font-size: 1.5rem;
+	vertical-align: middle;
+	margin-left: 1rem;
+	color: #003E65;
+	font-weight: 600;
+}
+.correspondenceContainer img{
+	width: 9%;
+}
+.institutionalLogos{
+	text-align: right;
+}
+.institutionalLogos #alcaldiaLogo{
+	width: 22%;
+}
+.institutionalLogos #hospitalLogo{
+	width: 32%;
+}
+
+/*----------------------------------------
+Left Side Section Styles
+----------------------------------------*/
+.principalContainer{
+	margin-top: 0.5rem;
+}
+
+/*----------------------------------------
+Left Side Section Styles
+----------------------------------------*/
+.sideSection, .generalSection{
+	display: inline-block;
+	padding: 1rem 2rem !important;
+}
+.sideSection{
+	border-right: 0.5px solid #B1B1B1;
+	border-bottom: 0.5px solid #B1B1B1;
+	vertical-align: top;
+}
+.sideSection h2{
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	border-bottom: 1.5px solid orange;
+	text-align: right;
+	font-weight: 600;
+	color: #003E65;
+}
+.sideSection ul{
+	padding: 0 0.8rem;
+	list-style-type: none;
+	font-size: 0.79rem;
+}
+.sideSection li{
+	margin-bottom: 0.15rem;
+}
+.sideSection li a{
+	padding: 0.15rem 0.5rem;
+	display: block;
+	border-radius: 5px;
+}
+.sideSection .sideText{
+	padding: 0.15rem 0.5rem;
+	display: block;
+	border-radius: 5px;
+	font-weight: bold;
+}
+.active{
+	color: #FFF;
+	background: #EA2944;
+	display: block;
+	padding-left: 0.9rem !important;;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+.active:hover{
+	color: #FFF;
+	background: #B32438;
+}
+
+/*----------------------------------------
+Right Side Section Body Styles
+----------------------------------------*/
+.bodyContainer{
+	box-shadow: 0 0 2px #003E65;
+	border-radius: 5px;
+}
+.bodyContainer select{
+	cursor: pointer;
+}
+.invalid-feedback,
+.valid-feedback{
+	font-size: 70% !important;
+	font-weight: 600;
+}
+.btn{
+	cursor: pointer;
+}
+.btn:disabled{
+	background-color: #DC3545 !important;
+	border: 1px solid #DC3545 !important;
+}
+.searchButton{
+	text-align: right;
+	margin-right: 15px;
+	margin-top: 1rem;
+}
+.searchButton a{
+	padding: .175rem 1.5rem;
+	font-size: 0.75rem;
+}
+.associateButton a{
+	padding: .175rem 1.5rem;
+	font-size: 0.75rem;
+	color: #4C4C4C;
+}
+.clasificactionTitle{
+	font-size: 0.85rem;
+	font-weight: 500;
+}
+.titleStyles, .dateStyles{
+	width: 100%;
+	margin-top: 0.5rem;
+	padding: 0.1rem 0;
+	border-bottom: 1px solid #C9DDF1;
+}
+.titleStyles{
+	text-align: center;
+}
+.titleStyles span, .titleStyles h3{
+	display: inline-block;
+}
+.titleStyles span{
+	font-size: 0.8rem;
+	border-right: 1px solid #B1B1B1;
+}
+.titleStyles h3{
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	text-align: center;
+	padding-right: 8rem;
+}
+.dateStyles span{
+	display: inline-block;
+	font-size: 0.78rem;
+}
+.dateStyles label{
+	font-weight: bold;
+	margin-bottom: 0.5rem !important;
+}
+.dateStyles label, .dateStyles input{
+	display: inline-block;
+}
+.dateStyles .form-control{
+	width: 60% !important;
+	margin-left: 0.5rem !important;
+	font-size: 0.78rem !important;
+	height: unset !important;
+	padding: 0.2rem 0.75rem !important;
+}
+.filedForm{
+	padding: 0 15px 1rem;
+}
+.filedFormNew{
+	padding: 1rem 15px;
+}
+.filedForm label{
+	font-size: 0.78rem;
+	margin-bottom: 0.2rem;
+}
+.filedForm .form-group{
+	margin-bottom: 0.5rem;
+}
+.filedForm .form-group small{
+	padding: 0 15px;
+}
+.filedForm .form-control{
+	font-size: 0.78rem;
+	height: unset;
+	padding: 0.3rem 0.75rem;
+}
+.border-bottom-blue{
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #C9DDF1;
+}
+.buttonSubmit{
+	text-align: center;
+}
+.buttonSubmit .btn{
+	min-width: 50%;
+}
+.buttonsContainer{
+	text-align: center;
+	width: 100%;
+}
+.buttonsContainer .buttonSubmit{
+	display: inline-block;
+}
+.errorMessage{
+	border: 1px solid #F5C6CB;
+	border-radius: 7px;
+	padding: 0.5rem 1rem;
+	margin-right: 2rem;
+	margin-left: 2rem;
+	margin: auto;
+	text-align: center;
+	font-size: 0.75rem;
+	background-color: #F5C6CB;
+	color: #721C24;
+	width: 100%;
+}
+.successMessage{
+	border: 1px solid #DFF0D8;
+	border-radius: 7px;
+	padding: 0.5rem 1rem;
+	margin-right: 2rem;
+	margin-left: 2rem;
+	text-align: center;
+	font-size: 0.75rem;
+	background-color: #DFF0D8;
+	color: #3C763D;
+}
+.btnPrefer{
+	font-size: 0.9rem !important;
+}
+.btnSticker{
+	font-size: 0.6rem !important;
+	padding: 0.275rem 1.5rem;
+}
+.btn-associateButton{
+	width: 100%;
+	color: #4C4C4C !important;
+    background-color: #FFB718 !important;
+    border-color: #D69B18;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.btn-associateButton:hover {
+    color: #FFF !important;
+    background-color: #D29819 !important;
+    border-color: #D29819;
+}
+
+.footer{
+	width: 100%;
+	color: #FFF;
+	font-size: 0.8rem;
+	background-color: #009EE2;
+	padding: 1rem 3rem;
+	text-align: center;
+}
+
+/*----------------------------------------
+Form Styles
+----------------------------------------*/
+.formTitle{
+	font-size: 1.5rem;
+	color: #002A50;
+	text-align: center;
+	padding: 0.6rem;
+}
+.loginForm{
+	padding: 1rem 1rem 2rem;
+}
+.labelForm{
+	font-size: 0.8rem;
+	margin-bottom: 0.2rem;
+}
+.inputForm{
+	padding: 0.3rem 0.5rem;
+	font-size: 0.85rem !important; 
+}
+.infoButtonForm{
+	color: #C38A13;
+	font-size: 0.9rem;
+	text-align: right;
+	margin-top: 1.2rem;
+}
+
+/*----------------------------------------
+Table Styles
+----------------------------------------*/
+.table{
+	margin: auto;
+}
+.tableStyles{
+	margin: auto;
+	overflow: overlay;
+	margin-top: 1rem;
+	padding: 0 25px;
+}
+.thead_styles tr{
+	background-color: #003E65;
+	color: #FFF;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	font-weight: 600;
+	text-align: center;
+}
+.tbody_styles tr{
+	font-size: 0.72rem;
+	text-align: center;
+	cursor: pointer;
+}
+.tbody_styles tr td{
+	padding: .55rem .75rem;
+}
+.tbody_styles tr:nth-child(even){
+	background-color: #F1F1F1;
+}
+.table td button{
+	font-size: .7rem;
+	padding: .2rem .3rem;
+	margin: auto;
+	text-decoration: none;
+	color: #F7F7F7;
+	transition: all .3s ease;
+}
+.tableContainerAll{
+	overflow-x: auto;
+	padding: 0 !important;
+	margin-bottom: 1rem;
+}
+.table tbody tr:hover a{
+	color: #F7F7F7 !important;
+}
+.table tbody tr:hover{
+	background-color: #6B6B6B; 
+}
+
+/*----------------------------------------
+Upload Files Styles
+----------------------------------------*/
+.idText{
+	font-size: 0.9rem;
+	padding: 15px;
+}
+.afu-attach-pin{
+	font-size: 0.8rem !important;
+	cursor: pointer;
+}
+.label-info{
+	font-size: 0.7rem !important;
+}
+.correct {
+	border-color: #28A745 !important;
+}
+.incorrect{
+	border-color: #DC3545 !important;
+}
+
+/*----------------------------------------
+Sticker Styles
+----------------------------------------*/
+.stickerContainer{
+	max-width: 200px;
+	display: none;
+}
+.stickerContainer .imagenContainer,
+.stickerContainer .textContainer{
+	display: inline-block;
+	vertical-align: middle;
+}
+.stickerContainer .imagenContainer{
+	width: 30%;
+}
+.stickerContainer .imagenContainer img{
+	width: 100%;
+}
+.stickerContainer .textContainer{
+	font-size: 0.5rem;
+	width: 69%;
+	padding: 0 0 0 0.5rem;
+}
+.stickerContainer .textContainer p{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+@media print{
+	.hidePrint{
+		display: none;
+	}
+	.stickerContainer{
+		display: block;
+	}
+}
+
+/*------------------------------------------------------------*/
+/*PAGINATION CONTROLS*/
+/*-------------------------------------------------------------*/
+.paginationControls{
+	text-align: right;
+}
+.paginationControls .current{
+	background: #3F9AE8 !important;
+	border-color: #3F9AE8 !important;
+	color: #F2F2F2 !important;
+}
+.paginationControls li{
+	font-size: 12px !important;
+	border-radius: 3px !important;
+	border: 1px solid #A6A6A6;
+	color: #606060 !important;
+}
+.paginationControls a{
+	color: #3C3C3C !important;
+	text-decoration: none !important;
+}
+.paginationControls span{
+	border-right: none;
+	font-size: 12px;
+}
+.paginationControls a, .paginationControls .current, .paginationControls .disabled{	
+    padding: 0.2rem 0.55rem !important;
+}
+.ngx-pagination .pagination-next a::after, 
+.ngx-pagination .pagination-next.disabled::after,
+.ngx-pagination .pagination-previous a::before,
+.ngx-pagination .pagination-previous.disabled::before{
+	content: '' !important;
+	display: none !important;
+	margin: 0 !important;
+}
+
+
+
+
+
+/*----------------------------------------
+Preloader Animation Styles
+----------------------------------------*/
+.preloaderContainer{
+	display: table;
+	margin: auto;
+}
+#preloaderDisco{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	background: #009BDB;
+	border-radius: 100%;
+	-webkit-animation: discAnimation 1.5s infinite linear;
+	-o-animation: discAnimation 1.5s infinite linear;
+	animation: discAnimation 1.5s infinite linear; 
+	margin: 15px;
+}
+
+#preloaderDisco:after{
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	border-top: 5px solid #004E94;
+	border-bottom: 5px solid #004E94;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-radius: 100%;
+	content: '';
+	top: -20px;
+	left: -20px;
+	-webkit-animation: discAnimationAfter 1.5s infinite linear;
+	-o-animation: discAnimationAfter 1.5s infinite linear;
+	animation: discAnimationAfter 1.5s infinite linear; 
+}
+
+@keyframes discAnimation{
+	0%{
+		transform: rotate(0deg);
+	}
+	50%{
+		transform: rotate(180deg);
+		background: #8CBFC6;
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+@keyframes discAnimationAfter{
+    0% {
+    	border-top:5px solid #004E94;
+    	border-bottom:5px solid #004E94;
+    }
+    50% {
+    	border-top:5px solid #3498DB;
+    	border-bottom:5px solid #3498DB;
+    }
+    100% {
+    	border-top:5px solid #004E94;
+    	border-bottom:5px solid #004E94;
+    }
+}
+
+/*----------------------------------------
+Preloader Ondas Animation Styles
+----------------------------------------*/
+#preloaderOndas{
+	position: relative;
+	margin: 1.3rem 0 2.5rem;
+}
+
+#preloaderOndas span{
+	display: block;
+	bottom: 0px;
+	width: 9px;
+	height: 5px;
+	background: #9B59B6;
+	position: absolute;
+	-webkit-animation: waveAnimation 1.5s infinite ease-in-out;
+	-o-animation: waveAnimation 1.5s infinite ease-in-out;
+	animation: waveAnimation 1.5s infinite ease-in-out; 
+}
+
+#preloaderOndas span:nth-child(2){
+	left:11px;
+	animation-delay: .2s;
+}
+
+#preloaderOndas span:nth-child(3){
+	left:22px;
+	animation-delay: .4s;
+}
+
+#preloaderOndas span:nth-child(4){
+	left:33px;
+	animation-delay: .6s;
+}
+
+#preloaderOndas span:nth-child(5){
+	left:44px;
+	animation-delay: .8s;
+}
+
+@keyframes waveAnimation{
+	0%{
+		height: 5px;
+		transform: translateY(0px);
+		background: #9B59B6;
+	}
+	25%{
+		height: 30px;
+		transform: translateY(15px);
+		background: #3498DB;
+	}
+	50%{
+		height: 5px;
+		transform: translateY(0px);
+		background: #9B59B6;
+	}
+	100%{
+		height: 5px;
+		transform: translateY(0px);
+		background: #9B59B6;
+	}
+}
+
+.signature{
+	font-size: 0.6rem;
+	font-weight: bold;
+	color: #FDC3CD;
+}

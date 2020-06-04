@@ -1,0 +1,226 @@
+<div class="bodyContainer container-fluid hidePrint">
+	<div class="row justify-content-center align-items-center">
+		<div class="col col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div class="formContainer">
+				<div class="errorMessage mt-3 mb-3" *ngIf="status=='error' && errorMessage">
+					<span>{{ errorMessage }}</span>
+				</div>
+				<!-- <div class="preloaderContainer mt-5 mb-5" *ngIf="!userClasification && !countries && !status && !errorMessage">
+					<div id="preloaderDisco">
+					</div>
+				</div> -->
+				<div>
+					<div class="titleStyles">
+						<span class="col col-sm-2 col-md-2 col-lg-1 col-xl-1"><a href="#">Regresar</a></span>
+						<h3 class="col col-sm-10 col-md-10 col-lg-11 col-xl-11">{{ page_title }}</h3>
+					</div>
+				<!-- ------------------------------------------------------------------------------------
+				Busqueda de Datos
+				------------------------------------------------------------------------------------ -->
+					<form class="filedForm" #searchForm="ngForm" (ngSubmit)="onSubmitSearch()">
+						
+						<div class="form-group mt-3">
+							<div class="col-lg-12">
+								<label for="fieldBy" class="labelForm col-lg-2 d-inline-block pl-0">Tipo de Radicado:*</label>
+								<select name="fieldBy" class="form-control inputForm col-lg-10 d-inline-block" #fieldBy="ngModel" [(ngModel)]="typeField" (change)="resetFiledSelected()" required>
+									<option value="1">Radicado de Entrada</option>
+									<option value="2">Radicado de Salida</option>
+									<option value="3">Radicado Interno</option>
+								</select>
+								<small class="invalid-feedback d-block p-0" *ngIf="fieldBy.invalid && fieldBy.touched">Seleccione el Tipo de Radicado de la lista desplegable</small>
+							</div>
+						</div>
+					
+						<div class="form-group" *ngIf="typeField && fieldBy.valid">
+							<div class="col-lg-12">
+								<label for="searchType" class="labelForm col-lg-2 d-inline-block pl-0">Tipo de Usuario:*</label>
+								<select name="searchType" class="form-control inputForm col-lg-10 d-inline-block" #searchType="ngModel" [(ngModel)]="searchId" required>
+									<option value="1">ID Radicado</option>
+									<option value="2">Numero de Documento</option>
+									<option value="3">Asunto</option>
+								</select>
+								<small class="invalid-feedback d-block p-0" *ngIf="searchType.invalid && searchType.touched">Seleccione un Tipo de Busqueda</small>
+							</div>
+						</div>
+					
+						<div class="form-group" *ngIf="searchId && searchId==1">
+							<div class="col-lg-5 m-auto">
+								<label for="idNumber" class="labelForm col-lg-4 d-inline-block pl-0 text-right">Numero de Radicado*</label>
+								<input type="text" name="idNumber" class="form-control inputForm col-lg-8 d-inline-block" [ngClass]="{'is-invalid':idNumber.invalid && idNumber.touched}" #idNumber="ngModel" [(ngModel)]="idNumberValue" required pattern="[0-9]+">
+								<small class="invalid-feedback d-block p-0 text-right" *ngIf="idNumber.invalid && idNumber.touched">Debe ingresar un Numero de Radicado válido</small>
+							</div>
+						</div>
+						<div class="form-group" *ngIf="searchId && searchId==2">
+							<div class="col-lg-5 m-auto">
+								<label for="idNumber" class="labelForm col-lg-4 d-inline-block pl-0 text-right">Numero de Documento*</label>
+								<input type="text" name="idNumber" class="form-control inputForm col-lg-8 d-inline-block" [ngClass]="{'is-invalid':idNumber.invalid && idNumber.touched}" #idNumber="ngModel" [(ngModel)]="idNumberValue" required pattern="[0-9]+" minlength="6" maxlength="10">
+								<small class="invalid-feedback d-block p-0 text-right" *ngIf="idNumber.invalid && idNumber.touched">Debe ingresar un Numero de Documento válido</small>
+							</div>
+						</div>
+						<div class="form-group" *ngIf="searchId && searchId==3">
+							<div class="col-lg-12 m-auto">
+								<label for="affairSearch" class="labelForm col-lg-2 d-inline-block pl-0 align-top">Asunto*</label>
+								<textarea name="affairSearch" class="form-control inputForm col-lg-10 d-inline-block" [ngClass]="{'is-invalid':affairSearch.invalid && affairSearch.touched}" #affairSearch="ngModel" [(ngModel)]="affairSearchValue" cols="30" rows="2" required></textarea>
+								<small class="invalid-feedback d-block p-0 text-right" *ngIf="affairSearch.invalid && affairSearch.touched">Debe ingresar un asunto válido para poder realizar la busqueda</small>
+							</div>
+						</div>
+						
+						<div class="buttonSubmit mt-2 border-bottom-blue" style="text-align: center;">
+							<input type="submit" value="Buscar" class="btn btn-success searchButton" [disabled]="searchForm.invalid">
+						</div>
+					</form>
+					<!-- ------------------------------------------------------------------------------------
+					Fin de la Busqueda de Datos
+					------------------------------------------------------------------------------------ -->
+					<div class="errorMessage mb-3" *ngIf="searchStatus=='error' && searchErrorMessage">
+						<span>{{ searchErrorMessage }}</span>
+					</div>
+					<div class="preloaderContainer mt-1 mb-3" *ngIf="!searchStatus && !filed && preLoader==1">
+						<div id="preloaderDisco">
+						</div>
+					</div>
+					<!-- ------------------------------------------------------------------------------------
+					Mostrar Resultados de la Busqueda
+					------------------------------------------------------------------------------------ -->
+					<div class="titleStyles" style="border-bottom: none;" *ngIf="filed">
+						<h3 class="col col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding-right: 15px;">{{ page_title2 }}</h3>
+					</div>
+					<div class="border-bottom-blue tableStyles" *ngIf="filed">
+						<table class="table table-bordered col col-sm-11 col-md-10 col-lg-12 col-xl-12">
+							<thead class="thead_styles">
+								<tr>
+									<th style="width: 15%">Número de Radicado</th>
+									<th style="width: 10%">Documento</th>
+									<th style="width: 12%">Nombre</th>
+									<th style="width: 14%">Primer Apellido</th>
+									<th style="width: 14%">Segundo Apellido</th>
+									<th>Asunto</th>
+									<th style="width: 11%">Acción</th>
+								</tr>
+							</thead>
+							<tbody class="tbody_styles" *ngIf="filed">
+								<tr *ngFor="let fil of filed | paginate: {itemsPerPage: itemsPerPage, currentPage: actualPage}">
+									<td>{{ fil.id }}</td>
+									<td>{{ fil.app_users.id }}</td>
+									<td>{{ fil.app_users.name }}</td>
+									<td>{{ fil.app_users.surname }}</td>
+									<td>{{ fil.app_users.second_surname }}</td>
+									<td>{{ fil.affair }}</td>
+									<td>
+										<button class="btn btn-info d-inline-block" style="width: 80%" type="button" (click)="seeFiled(fil.id)">Ver</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="paginationControls mt-3" *ngIf="filed && filed.length > 10">
+							<pagination-controls (pageChange)="pageChange($event)"
+										 previousLabel="Anterior"
+										 nextLabel="Siguiente"
+										 maxSize="4">
+							</pagination-controls>
+						</div>
+					</div>
+					<!-- ------------------------------------------------------------------------------------
+					Fin Mostrar Resultados de la Busqueda
+					------------------------------------------------------------------------------------ -->
+					<!-- ------------------------------------------------------------------------------------
+					Ver el radicado clickeado por el usuario con toda la información existente y sus adjuntos
+					------------------------------------------------------------------------------------ -->
+					<div class="titleStyles" *ngIf="filedSelected">
+						<h3 class="col col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4" style="padding-right: 15px;">{{ page_title3 }}{{ filedSelected.id }}</h3>
+					</div>
+					<app-filed-in-model *ngIf="filedSelected && typeField==1"
+										(sendFlagUpdate)="onSubmit($event)"
+										[appUsers]="this.filedSelected.app_users"
+										[userClasification]="this.userClasification"
+										[dependences]="this.dependences"
+										[attached]="this.attached"
+										[filedIn]="this.filedSelected"
+										[countries]="this.countries"
+										[departments]="this.departments"
+										[municipalities]="this.municipalities"
+										[bottomValue]="this.bottomValue"
+										[filedInId]="this.filedInId"
+										[itemsStatus]="this.itemsStatus"
+					></app-filed-in-model>
+
+					<app-filed-out-model *ngIf="filedSelected && typeField==2"
+										 (sendFlagUpdate)="onSubmit($event)"
+										 [appUsers]="this.filedSelected.app_users"
+										 [userClasification]="this.userClasification"
+										 [dependences]="this.dependences"
+										 [attached]="this.attached"
+										 [filedOut]="this.filedSelected"
+										 [bottomValue]="this.bottomValue"
+										 [filedOutId] = "this.filedOutId"
+										 [itemsStatus]="this.itemsStatus"
+										 [documentId]="this.filedSelected.documents_id"
+					>
+					</app-filed-out-model>
+
+					<app-memorandum-model *ngIf="filedSelected && typeField==3"
+										  (sendFlagUpdate)="onSubmit($event)"
+										  [appUsers]="this.filedSelected.app_users"
+										  [memorandum]="this.filedSelected"
+										  [userClasification]="this.userClasification"
+										  [countries]="this.countries"
+										  [departments]="this.departments"
+										  [municipalities]="this.municipalities"
+										  [attached]="this.attached"
+										  [dependences]="this.dependences"
+										  [bottomValue]="this.bottomValue"
+										  [memorandumId]="this.memorandumId"
+										  [itemsStatus]="this.itemsStatus"
+					></app-memorandum-model>
+					<div style="margin-top: -1rem;" class="filedForm" *ngIf="filedSelected">
+						<div>
+							<p class="clasificactionTitle">Documento</p>
+						</div>
+						<small class="col-sm-12" *ngIf="filedSelected.documents">
+							<a target="_blank" href="{{ documentUrl }}{{ filedSelected.documents.name }}">{{ filedSelected.documents.name }}</a>
+						</small>
+						<small class="col-sm-12" *ngIf="!filedSelected.documents && typeField!=2">
+							No hay documentos asociados al radicado.
+						</small>
+						<form #documentForm="ngForm" (ngSubmit)="documentSubmit()" *ngIf="!filedSelected.documents && typeField==2">
+							<span class="btn btn-info btnSticker ml-3" (click)="stickerPrint()">Imprimir Sticker</span>
+
+							<app-documents-register (sendName)="receiveName($event)"></app-documents-register>
+
+							<div class="buttonSubmit mt-3 mb-3" style="text-align: center;" *ngIf="document_name && toogleButtonDocument==1">
+								<input type="submit" value="Guardar Documento" class="btn btn-success btnPrefer" [disabled]="documentForm.invalid || documentValider==1">
+							</div>
+
+							<div [ngClass]="{'successMessage':docStatus=='success', 'errorMessage':docStatus=='error'}" *ngIf="(docStatus=='error' || docStatus=='success') && docMessage">
+								<span>{{ docMessage }}</span>
+							</div>
+							<div class="preloaderContainer" *ngIf="preLoader2==1">
+								<div id="preloaderOndas" style="left: -2rem">
+									<span></span><span></span><span></span><span></span><span></span>
+								</div>
+							</div>
+						</form>
+					</div>						
+					<!-- ------------------------------------------------------------------------------------
+					Fin Ver el radicado clickeado por el usuario con toda la información existente y sus adjuntos
+					------------------------------------------------------------------------------------ -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="stickerContainer" *ngIf="typeField==2 && filedSelected && dependenceName && attachedName">
+	<div class="imagenContainer">
+		<img src="../../../assets/img/subredLogo.png" alt="">
+	</div>
+	<div class="textContainer">
+		<p>SUBRED SUR ESE - RAD: #{{ filedSelected.id }}</p>
+		<p style="text-transform: uppercase;">Rem: {{ filedSelected.app_users.name }} {{ filedSelected.app_users.surname }} {{ filedSelected.app_users.second_surname }}</p>		
+		<p style="text-transform: uppercase;">{{ dependeceName }}</p>
+		<p style="text-transform: uppercase;">Des: {{ filedSelected.desName }} {{ filedSelected.desSurname }}</p>
+		<p style="text-transform: uppercase;">{{ filedSelected.desEntity }}</p>		
+		<p><span>Folios: {{ filedSelected.number_folios }} </span><span>Adjuntos: {{ attachedName }}</span></p>
+		<p>Fecha: {{ day }}/{{ month }}/{{ year }} 12:36</p>
+		<p>Visitenos en www.subredsur.gov.co</p>
+	</div>
+</div>

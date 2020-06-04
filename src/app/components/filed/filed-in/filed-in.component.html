@@ -1,0 +1,83 @@
+<div class="bodyContainer container-fluid hidePrint">
+	<div class="row justify-content-center align-items-center">
+		<div class="col col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div class="formContainer">
+				<div class="errorMessage mt-3 mb-3" *ngIf="status=='error' && errorMessage">
+					<span>{{ errorMessage }}</span>
+				</div>
+				<div class="preloaderContainer mt-5 mb-5" *ngIf="!userClasification && !countries && !dependences && !status && !errorMessage">
+					<div id="preloaderDisco">
+					</div>
+				</div>
+				<div *ngIf="userClasification && countries && dependences && filedIn">
+					<div class="titleStyles">
+						<span class="col col-sm-2 col-md-2 col-lg-1 col-xl-1"><a href="#">Regresar</a></span>
+						<h3 class="col col-sm-10 col-md-10 col-lg-11 col-xl-11">{{ page_title }}</h3>
+					</div>
+					<app-filed-in-model (sendFlagUpdate)="onSubmit($event)"
+										[appUsers]="this.appUsers"
+										[userClasification]="this.userClasification"
+										[dependences]="this.dependences"
+										[attached]="this.attached"
+										[filedIn]="this.filedIn"
+										[countries]="this.countries"
+										[departments]="this.departments"
+										[municipalities]="this.municipalities"
+										[bottomValue]="this.bottomValue"
+										[filedInId]="this.filedInId"
+										[itemsStatus]="this.itemsStatus"
+										[status]="this.status"
+										[errorCode]="this.errorCode"
+										[errorMessage]="this.errorMessage"
+					></app-filed-in-model>		
+					<div [ngClass]="{'successMessage':addStatus=='success', 'errorMessage':addStatus=='error'}" *ngIf="(addStatus=='error' || addStatus=='success') && addMessage">
+						<span>{{ addMessage }}</span>
+					</div>
+					<div class="preloaderContainer" *ngIf="preLoader2==1">
+						<div id="preloaderOndas" style="left: -2rem">
+							<span></span><span></span><span></span><span></span><span></span>
+						</div>
+					</div>
+					
+					<form class="filedForm mt-3" #documentForm="ngForm" (ngSubmit)="documentSubmit(documentForm)" *ngIf="filedInId">
+						<span class="idText">Numero de Radicado: <b>{{ filedInId }}</b></span>
+						<span class="btn btn-info btnSticker ml-3" (click)="stickerPrint()">Imprimir Sticker</span>
+
+						<app-documents-register (sendName)="receiveName($event)"></app-documents-register>
+
+						<div class="buttonSubmit mt-3 mb-3" style="text-align: center;" *ngIf="toogleButtonNew==1">
+							<input type="submit" value="Guardar Documento" class="btn btn-success btnPrefer" [disabled]="documentForm.invalid || documentValider==1">
+						</div>
+
+						<div [ngClass]="{'successMessage':docStatus=='success', 'errorMessage':docStatus=='error'}" *ngIf="(docStatus=='error' || docStatus=='success') && docMessage">
+							<span>{{ docMessage }}</span>
+						</div>
+						<div class="preloaderContainer" *ngIf="preLoader3==1">
+							<div id="preloaderOndas" style="left: -2rem">
+								<span></span><span></span><span></span><span></span><span></span>
+							</div>
+						</div>
+
+						<div class="buttonSubmit mt-3 mb-3" style="text-align: center;" *ngIf="toogleButtonNew==2">
+							<a [routerLink]="['/app-users/nuevo-registro']" (click)="newFiledIn(documentForm)" class="btn btn-info btnPrefer">Nuevo Radicado</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="stickerContainer" *ngIf="appUsers && filedIn && dependenceName">
+	<div class="imagenContainer">
+		<img src="../../../assets/img/subredLogo.png" alt="">
+	</div>
+	<div class="textContainer">
+		<p>SUBRED SUR ESE - RAD: #{{ filedInId }}</p>
+		<p style="text-transform: uppercase;">Rem: {{ appUsers.name }} {{ appUsers.surname }} {{ appUsers.second_surname }}</p>
+		<p style="text-transform: uppercase;">Des: {{ dependenceName }}</p>
+		<p><span>Folios: {{ filedIn.number_folios }} </span><span>Adjuntos: {{ attachedName }}</span></p>
+		<p>Fecha: {{ day }}/{{ month }}/{{ year }} 12:36</p>
+		<p>Visitenos en www.subredsur.gov.co</p>
+	</div>
+</div>

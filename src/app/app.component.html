@@ -1,20 +1,78 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="headerContainer hidePrint">
+	<div class="wrapHeader">
+		<div class="correspondenceContainer col col-sm-12 col-md-12 col-lg-6 col-xl-6">			
+			<img src="../assets/img/correspondenceLogo.png" alt="Correspondencia Subred Sur" title="Correspondencia Subred Sur">
+			<span>Correspondencia Subred Sur</span>
+		</div>
+		<div class="institutionalLogos col col-sm-12 col-md-12 col-lg-6 col-xl-6">
+			<!-- <img id="alcaldiaLogo" src="../assets/img/alcaldiaLogo.png" alt=""> -->
+			<a href="http://www.subredsur.gov.co/"><img id="hospitalLogo" src="../assets/img/hospitalLogo.png" alt="Subred Integrada de Servicios de Salud Sur E.S.E." title="Subred Integrada de Servicios de Salud Sur E.S.E."></a>
+		</div>
+	</div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<div class="principalContainer">
+	<div class="sideSection col col-sm-12 col-md-2 col-lg-2 col-xl-2 hidePrint">
+		<div class="sectionContent" *ngIf="identity">
+			<h2>Radicación</h2>
+			<ul>
+				<li><a [routerLink]="['/radicado/salida']" [routerLinkActive]="['active']">Salida</a></li>
+				<li><a [routerLink]="['/radicado/entrada']" [routerLinkActive]="['active']">Entrada</a></li>
+				<li><a [routerLink]="['memorando/nuevo-registro']" [routerLinkActive]="['active']">Interna</a></li>
+			</ul>
+		</div>
+		<div class="sectionContent" *ngIf='identity'>
+			<h2>Busqueda</h2>
+			<ul>
+				<li><a [routerLink]="['/radicado/buscar-radicado']" [routerLinkActive]="['active']">Buscar Radicados</a></li>
+			</ul>
+		</div>
+		<div class="sectionContent">
+			<h2>Usuario</h2>
+			<ul *ngIf="!identity">
+				<li><a [routerLink]="['/user/login']" [routerLinkActive]="['active']" *ngIf="!identity">Iniciar Sesión</a></li>
+			</ul>
+			<ul *ngIf="identity && identity.role != 'admin'">
+				<li class="sideText">{{ identity.name + ' ' + identity.surname}}</li>
+				<li><a [routerLink]="['/editar/contraseña/usuario/', identity.sub]" [routerLinkActive]="['active']" *ngIf="identity">Actualizar Contraseña</a></li>
+				<li><a [routerLink]="['/user/logout/1']" [routerLinkActive]="['active']" *ngIf="identity">Cerrar Sesión</a></li>
+			</ul>
+			<ul *ngIf="identity && identity.role == 'admin'">
+				<li class="sideText">{{ identity.name + ' ' + identity.surname}}</li>
+				<li><a [routerLink]="['/listar/usuarios']" [routerLinkActive]="['active']" *ngIf="identity">Listar Usuarios</a></li>
+				<li><a [routerLink]="['/registrar/usuario']" [routerLinkActive]="['active']" *ngIf="identity">Agregar Usuario</a></li>
+				<li><a [routerLink]="['/editar/contraseña/usuario/', identity.sub]" [routerLinkActive]="['active']" *ngIf="identity">Actualizar Contraseña</a></li>
+				<li><a [routerLink]="['/user/logout/1']" [routerLinkActive]="['active']" *ngIf="identity">Cerrar Sesión</a></li>
+			</ul>
+		</div>
+		<div class="sectionContent" *ngIf="identity && identity.role == 'admin'">
+			<h2>Clasificación de Usuarios</h2>
+			<ul>
+				<li><a [routerLink]="['/listar/clasificacion/usuarios']" [routerLinkActive]="['active']">Listar Clasificación</a></li>
+				<li><a [routerLink]="['/registrar/clasificacion/usuarios']" [routerLinkActive]="['active']">Agregar Clasificación</a></li>
+			</ul>
+		</div>
+		<div class="sectionContent" *ngIf="identity && identity.role == 'admin'">
+			<h2>Dependencias</h2>
+			<ul>
+				<li><a [routerLink]="['/listar/dependencias']" [routerLinkActive]="['active']">Listar Dependencias</a></li>
+				<li><a [routerLink]="['/registrar/dependencias']" [routerLinkActive]="['active']">Agregar Dependencias</a></li>
+			</ul>
+		</div>
+		<div class="sectionContent" *ngIf="identity && identity.role == 'admin'">
+			<h2>Tipo de Adjuntos</h2>
+			<ul>
+				<li><a [routerLink]="['/listar/adjuntos']" [routerLinkActive]="['active']">Listar Tipo de Adjuntos</a></li>
+				<li><a [routerLink]="['/registrar/adjuntos']" [routerLinkActive]="['active']">Agregar Tipo de Adjunto</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="generalSection col col-sm-12 col-md-10 col-lg-10 col-xl-10">
+		<router-outlet></router-outlet>
+	</div>
+	<div class="footer" style="bottom: 0">
+		<span class="d-block">Copyright© 2020</span>
+		<span class="d-block">Subred Integrada de Servicios de Salud Sur E.S.E.</span>
+		<span class="d-block">Todos los derechos reservados</span>
+		<span class="d-block signature">SRG</span>
+	</div>
+</div>

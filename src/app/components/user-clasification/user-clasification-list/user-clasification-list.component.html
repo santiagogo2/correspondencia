@@ -1,0 +1,63 @@
+<div class="bodyContainer container-fluid">
+	<div class="row justify-content-center align-items-center">
+		<div class="col col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<div class="formContainer">
+				<div class="errorMessage mt-3 mb-3" *ngIf="status=='error' && errorMessage">
+					<span>{{ errorMessage }}</span>
+				</div>
+				<div class="preloaderContainer mt-5 mb-5" *ngIf="!userClasification && !errorMessage">
+					<div id="preloaderDisco">
+					</div>
+				</div>
+				<div *ngIf="userClasification">
+					<div class="titleStyles">
+						<span class="col col-sm-2 col-md-2 col-lg-1 col-xl-1"><a href="javascript:history.back()">Regresar</a></span>
+						<h3 class="col col-sm-10 col-md-10 col-lg-11 col-xl-11">{{ page_title }}</h3>
+					</div>
+					<div class="col col-sm-12 mt-4 mb-3" style="margin: auto;" [ngClass]="{'successMessage':status=='success', 'errorMessage':status=='error'}" *ngIf="(status=='error' || status=='success') && responseMessage">
+						<span>{{ responseMessage }}</span><br/>
+					</div>
+					<div class="preloaderContainer mt-3" *ngIf="preloaderStatus">
+						<div id="preloaderOndas" style="left: -2rem">
+							<span></span><span></span><span></span><span></span><span></span>
+						</div>
+					</div>
+					<div class="tableContainerAll mt-3">
+						<div class="paginationControls" *ngIf="userClasification && userClasification.length > itemsPerPage">
+							<pagination-controls (pageChange)="pageChange($event)"
+												 previousLabel="Anterior"
+												 nextLabel="Siguiente"
+												 maxSize="4">
+							</pagination-controls>
+						</div>
+						<table class="table table-bordered col col-sm-11 col-md-10 col-lg-12 col-xl-12">
+							<thead class="thead_styles">
+								<tr>
+									<th style="width: 5%">Id</th>
+									<th style="width: 30%">Nombre</th>
+									<th style="width: 10%">Acción</th>
+								</tr>
+							</thead>
+							<tbody class="tbody_styles">
+								<tr *ngFor="let clasificaction of userClasification | paginate: {itemsPerPage: itemsPerPage, currentPage: actualPage}">
+									<td [routerLink]="['/editar/clasificacion/usuario', clasificaction.id]">{{ clasificaction.id }}</td>
+									<td [routerLink]="['/editar/clasificacion/usuario', clasificaction.id]">{{ clasificaction.name }}</td>
+									<td>
+										<button class="btn btn-danger d-inline-block" style="width: 80%" type="button" (click)="deleteClasification(clasificaction.id)">Eliminar</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="paginationControls" *ngIf="userClasification && userClasification.length > itemsPerPage">
+							<pagination-controls (pageChange)="pageChange($event)"
+												 previousLabel="Anterior"
+												 nextLabel="Siguiente"
+												 maxSize="4">
+							</pagination-controls>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

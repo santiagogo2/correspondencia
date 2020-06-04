@@ -1,0 +1,7 @@
+.successMessage, .errorMessage{
+	border: none;
+	border-radius: unset;
+	padding: 0;
+	text-align: left;
+	background-color: unset;
+}	

@@ -1,0 +1,7 @@
+{
+	"/websamples.countryinfo/*": {
+		"target": "http://webservices.oorsprong.org",
+		"secure": false,
+		"changeOrigin": true
+	}
+}

@@ -1,0 +1,19 @@
+<form #userClasificationForm="ngForm" class="mt-3" (ngSubmit)="onSubmit(userClasificationForm)">
+	<div class="form-group col col-sm-12">
+		<label for="name" class="labelForm">Nombre de la clasificación de usuario*</label>
+		<input type="text" name="name" id="name" class="form-control inputForm" [ngClass]="{'is-invalid': name.invalid && name.touched}" #name="ngModel" [(ngModel)]="userClasification.name" required placeholder="Ingrese el nombre de la clasificación de usuario" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+">
+		<small class="invalid-feedback d-block col col-sm-12" *ngIf="name.invalid && name.touched">Debe ingresar el nombre de la clasificación de usuario. Solo se permiten letras</small>
+	</div>
+	
+	<div class="buttonSubmit mt-3">
+		<input type="submit" value="{{ buttonText }}" class="btn btn-success btnPrefer col-sm-12 col-md-8 col-lg-6" [disabled]="userClasificationForm.invalid">
+	</div>
+	<div class="preloaderContainer" *ngIf="preloaderStatus">
+		<div id="preloaderOndas" style="left: -2rem">
+			<span></span><span></span><span></span><span></span><span></span>
+		</div>
+	</div>
+	<div class="col col-sm-12 infoButtonForm mt-3 mb-4">
+		<small>Los campos marcados con * son requeridos en el formulario</small>
+	</div>
+</form>
